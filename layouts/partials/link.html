@@ -1,0 +1,5 @@
+<link href="{{ "/image/favicon.png" | relURL }}" rel="icon">
+<link href="{{ "/styles/main.css" | relURL }}" rel="stylesheet">
+{{ range .Params.style }}
+<link href="{{ print "styles/" .  | relURL }}" rel="stylesheet">
+{{ end }}

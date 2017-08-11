@@ -1,0 +1,21 @@
+{{ $parent := .Parent }}
+{{ if $parent.Params.hidden }}
+	{{ $parent = $parent.Parent }}
+{{ end }}
+<li><dl>
+	<div class="horizon">
+		<dt><a href="{{ $parent.RelPermalink }}">{{ $parent.Title }}</a> / <a href="{{ .RelPermalink }}">{{ .Title }}</a></dt>
+		<dd class="date">
+		<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format .Site.Params.dateformat }}</time>
+		</dd>
+	</div>
+	<dd>
+		{{ if .Params.description }}
+			<p>
+				{{ .Params.description | markdownify }}
+			</p>
+		{{ else }}
+			{{ .Summary }}
+		{{ end }}
+	</dd>
+</dl></li>

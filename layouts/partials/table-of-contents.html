@@ -1,0 +1,10 @@
+{{- $toc := .TableOfContents -}}
+{{- $re_contain_nothing_open := "<li>[[:space:]]*<ul>[[:space:]]*" -}}
+{{- $re_close := "</li>[[:space:]]*</ul>[[:space:]]*</nav>" -}}
+{{- $count := $toc | findRE $re_contain_nothing_open | len -}}
+{{- $toc = $toc | replaceRE $re_contain_nothing_open "" -}}
+{{- range (seq $count) -}}
+	{{- $toc = $toc | replaceRE $re_close "</nav>" -}}
+{{- end -}}
+{{- $toc = $toc | replaceRE "<nav[^>]+>[[:space:]]*" "" -}}
+{{ $toc | replaceRE "[[:space:]]*</nav>" "" | safeHTML }}

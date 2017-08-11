@@ -1,0 +1,80 @@
+[ads]
+other = "Ads"
+
+[author]
+other = "Hukumitu Youhei"
+
+[all-posts]
+other = "All Posts"
+
+[contact]
+other = "Contact"
+
+[search]
+other = "Search"
+
+[search-hint]
+other = "Search this website"
+
+[mail]
+other = "Mail"
+
+[privacy-policy]
+other = "Privacy Policy"
+
+[pages]
+other = "Pages"
+
+[sections]
+other = "Sections"
+
+[contents]
+other = "Contents"
+
+[recent-changes]
+other = "Recent Canges"
+
+[home]
+other = "Home"
+
+[next]
+other = "Next"
+
+[prev]
+other = "Prev"
+
+[first]
+other = "First"
+
+[last]
+other = "Last"
+
+[comment-by]
+other = "Comment by"
+
+[by]
+other = ""
+
+[title]
+other = "Title"
+
+[Series]
+other = "Series"
+
+[prev-post]
+other = "Prev Post"
+
+[next-post]
+other = "Next Post"
+
+[related-sections]
+other = "Related Sections"
+
+[related-posts]
+other = "Related Posts"
+
+[created]
+other = "Created on"
+
+[lastmod]
+other = "Modified on"

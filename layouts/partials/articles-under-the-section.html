@@ -1,0 +1,5 @@
+{{ range .Site.RegularPages }}
+	{{ if hasPrefix .Dir $.Dir }}
+		{{ .Render "summary" }}
+	{{ end }}
+{{ end }}

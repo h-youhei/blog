@@ -1,0 +1,54 @@
+{{ define "meta" }}
+	{{ if .Params.description }}
+		<meta name="description" content="{{ .Params.description | markdownify | plainify | chomp }}">
+	{{ else }}
+		{{ with .Summary | plainify | chomp }}
+			<meta name="description" content="{{ . }}">
+		{{ end }}
+	{{ end }}
+{{ end }}
+
+{{ define "title" }}
+	{{- if .Params.hide_section_in_title -}}
+		{{ .Title }} - {{ .Site.Title }}
+	{{- else }}
+		{{- $parent := .Parent }}
+		{{- if $parent.IsHome }}
+			{{ .Title }} - {{ .Site.Title }}
+		{{- else }}
+			{{- if $parent.Params.hidden }} {{ $parent = $parent.Parent }} {{ end -}}
+			{{ $parent.Title }} | {{ .Title }} - {{ .Site.Title }}
+		{{- end }}
+	{{- end }}
+{{- end -}}
+
+{{ define "h1" }}
+	{{ partial "breadcrumb.html" . }}
+	<h1>{{ .Title }}{{ partial "rss.html" . }}</h1>
+{{ end }}
+
+{{ define "header" }}
+	<div id="about" class="clearfix">
+		{{ partial "date.html" . }}
+	</div>
+	{{ if .Params.toc }}
+		<nav id="table-of-contents">
+			<h2>{{ i18n "contents"}}</h2>
+			{{ partial "table-of-contents.html" . }}
+		</nav>
+	{{ end }}
+{{ end }}
+
+{{ define "main" }}
+	{{ .Content }}
+{{ end }}
+
+{{ define "footer" }}
+	<footer id="page-footer">
+		{{ if not .Parent.IsHome }}
+			{{ partial "comment.html" . }}
+		{{ end }}
+		{{ partial "related.html" . }}
+		{{ partial "breadcrumb.html" . }}
+	</footer>
+{{ end }}

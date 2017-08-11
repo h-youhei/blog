@@ -1,0 +1,10 @@
+<li><dl>
+<dt><a href="{{ .RelPermalink }}">{{ .Title }}</a></dt>
+<dd>
+{{- if .Params.description }}
+<p>{{ .Params.description | markdownify }}</p>
+{{- else }}
+{{ .Summary }}
+{{- end -}}
+</dd>
+</dl></li>

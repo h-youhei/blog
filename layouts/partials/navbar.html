@@ -1,0 +1,20 @@
+<nav id="navbar">
+	<div class="inner">
+		<ul class="horizon">
+			<li><a href="#"><span class="button-link mark">↑</span></a></li>
+			<li><a href="#site-footer"><span class="button-link mark">↓</span></a></li>
+			{{- if .Params.toc }}
+				<li>
+					<div class="dropdown">
+						<div onclick="toggle_dropdown(this)" class="button-link">
+							{{ i18n "contents" }}<span class="dropdown-mark">▲</span>
+						</div>
+						<div class="dropdown-content">
+							{{- partial "table-of-contents.html" . -}}
+						</div>
+					</div>
+				</li>
+			{{- end }}
+		</ul>
+	</div>
+</nav>

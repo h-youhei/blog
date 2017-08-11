@@ -1,0 +1,25 @@
+baseURL = "https://hkmtyh.com"
+defaultContentLanguage = "ja"
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+
+[author]
+name = "福光洋平"
+email = "hukumitu.youhei@gmail.com"
+
+[taxonomies]
+ingridient = "ingridients"
+
+[Languages.ja]
+title = "福光洋平"
+hasCJKLanguage = true
+languageName = "日本語"
+languageCode = "ja-jp"
+dateformat = "2006年1月2日"
+
+
+[Languages.en]
+title = "Hukumitu Youhei"
+languageName = "English"
+languageCode = "en-us"
+dateformat = "Jan 2, 2006"

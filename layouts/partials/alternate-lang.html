@@ -1,0 +1,6 @@
+{{- if .IsTranslated -}}
+<link hreflang="{{ .Lang }}" href="{{ .RelPermalink }}" rel="alternate">
+{{- range .Translations | first 1 -}}
+<link hreflang="{{ .Lang }}" href="{{ .RelPermalink }}" rel="alternate">
+{{- end }}
+{{- end -}}

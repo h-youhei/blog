@@ -1,0 +1,9 @@
+<footer id="site-footer">
+<div class="inner">
+<p id="privacy-policy"><a href="{{ "/privacy-policy/" | relLangURL }}">{{ i18n "privacy-policy" }}</a></p>
+<p id="copyright"><small id="copyright">&copy;
+{{- if .Date.IsZero }}
+{{- with $.Site.GetPage "home" }} {{ .Date.Year }}{{ end }}
+{{- else }} {{ .Date.Year }}{{ end }} {{ i18n "author" }}</small>
+</div>
+</footer>

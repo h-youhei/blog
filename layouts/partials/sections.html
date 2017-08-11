@@ -1,0 +1,13 @@
+{{ range .Sections }}
+	<h2>{{ partial "h.html" . }}</h2>
+	<div class="flex-container">
+		{{ range .Sections }}
+			{{ if not .Params.hidden }}
+				<div class="grid2">
+					<h3>{{ partial "h.html" . }}</h3>
+					{{ with .Params.Description }}<p>{{ . }}</p>{{ end }}
+				</div>
+			{{ end }}
+		{{ end }}
+	</div>
+{{ end }}

@@ -1,0 +1,21 @@
+{{ with .Params.rel_sec }}
+	<dl>
+		<dt>{{ i18n "related-sections" }}</dt>
+		{{ range . }}
+			{{ with $.GetPage . }}
+				<dd><a href="{{ .RelPermalink }}">{{ .Title }}</a></dd>
+			{{ end }}
+		{{ end }}
+	</dl>
+{{ end }}
+
+{{ with .Params.rel_posts }}
+	<dl>
+		<dt>{{ i18n "related-posts" }}</dt>
+		{{ range . }}
+			{{ with $.GetPage . }}
+			<dd><a href="{{ .RelPermalink }}">{{ .Title }}</a></dd>
+			{{ end }}
+		{{ end }}
+	</dl>
+{{ end }}

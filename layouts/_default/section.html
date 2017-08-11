@@ -1,0 +1,32 @@
+{{ define "link" }}
+	<link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Title }} - {{ .Site.Title }}">
+{{ end }}
+
+{{ define "style" }}
+	<link href="{{ "/styles/list.css" | relURL }}" rel="stylesheet">
+{{ end }}
+
+{{ define "h1" }}
+	{{ partial "breadcrumb.html" . }}
+	<h1>{{ .Title }}{{ partial "rss.html" . }}</h1>
+{{ end }}
+
+{{ define "main" }}
+	{{ .Content }}
+	{{ if not .Params.manual }}
+		{{ if .Sections }}
+			<a href="#recent-changes">{{ i18n "recent-changes" }}</a>
+			{{ partial "sections.html" . }}
+			<h2 id="recent-changes">{{ i18n "recent-changes" }}</h2>
+			<ul class="articles">
+				{{ partial "articles-under-the-section.html" . }}
+			</ul>
+		{{ else }}
+			<ul class="articles">
+				{{ range .Pages }}
+					{{ .Render "summary-in-leaf" }}
+				{{ end }}
+			</ul>
+		{{ end }}
+	{{ end }}
+{{ end }}

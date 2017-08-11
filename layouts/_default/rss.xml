@@ -1,0 +1,40 @@
+{{ $pages := slice }}
+{{ if .Parent }} {{/* articles under the section */}}
+	{{ range .Site.RegularPages }}
+		{{ if hasPrefix .Dir $.Dir }}
+			{{ $pages = $pages | append  . }}
+		{{ end }}
+	{{ end }}
+{{ else }}
+	{{ $pages = where .Data.Pages "Section" "!=" "" }}
+{{ end -}}
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>{{ .Title }} - {{ .Site.Title }}</title>
+		<link>{{ .Permalink }}</link>
+		<description>最近の記事</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>{{ .Site.LanguageCode }}</language>
+		<managingEditor>{{ .Site.Author.email }} ({{ .Site.Author.name }})</managingEditor>
+		<webMaster>{{ .Site.Author.email }} ({{ .Site.Author.name }})</webMaster>
+		<copyright>Copyright {{ if .Date.IsZero }}{{ with $.Site.GetPage "home" }}{{ .Date.Year }}{{ end }}
+		{{ else }} {{ .Date.Year }}{{end}} {{ .Site.Author.name }}</copyright>
+		<lastBuildDate>{{ range $pages | first 1 }}{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}{{ end }}</lastBuildDate>
+		{{ with .OutputFormats.Get "RSS" }}
+			{{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType |safeHTML }}
+		{{ end }}
+		{{ range $pages }}
+		<item>
+			<title>{{ .Title }}</title>
+			<link>{{ .Permalink }}</link>
+			<pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+			<author>{{ .Site.Author.email }} {{.Site.Author.name }}</author>
+			<guid>{{ .Permalink }}</guid>
+			<description>{{ if .Params.description -}}
+				{{ .Params.description }}{{ else -}}
+				{{ .Summary | html }}{{ end }}</description>
+		</item>
+		{{ end }}
+	</channel>
+</rss>

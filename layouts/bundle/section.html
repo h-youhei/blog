@@ -1,0 +1,28 @@
+{{ define "meta" }}
+	<meta name="robots" content="noindex,follow">
+{{ end }}
+
+{{ define "link" }}
+	<link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Title }} - {{ .Site.Title }}">
+{{ end }}
+
+{{ define "style" }}
+	<link href="{{ "/styles/list.css" | relURL }}" rel="stylesheet">
+{{ end }}
+
+{{ define "h1" }}
+	{{ partial "breadcrumb.html" . }}
+	<h1>{{ .Title }}{{ partial "rss.html" . }}</h1>
+{{ end }}
+
+{{ define "main" }}
+	{{ .Content }}
+	{{ range .Sections }}
+		<h2>{{ .Title }}</h2>
+		<ul class="articles">
+			{{ range .Pages }}
+				{{ .Render "summary-in-leaf" }}
+			{{ end }}
+		</ul>
+	{{ end }}
+{{ end }}

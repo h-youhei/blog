@@ -1,0 +1,80 @@
+[ads]
+other = "広告"
+
+[author]
+other = "福光 洋平"
+
+[all-posts]
+other = "記事一覧"
+
+[contact]
+other = "連絡先"
+
+[search]
+other = "検索"
+
+[search-hint]
+other = "サイト内を検索"
+
+[mail]
+other = "メール"
+
+[privacy-policy]
+other = "個人情報保護方針"
+
+[pages]
+other = "ページ"
+
+[sections]
+other = "項目"
+
+[contents]
+other = "目次"
+
+[recent-changes]
+other = "最近の更新"
+
+[home]
+other = "ホーム"
+
+[next]
+other = "次へ"
+
+[prev]
+other = "前へ"
+
+[first]
+other = "最初へ"
+
+[last]
+other = "最後へ"
+
+[comment-by]
+other = "コメントを"
+
+[by]
+other = "で"
+
+[title]
+other = "タイトル"
+
+[prev-post]
+other = "前の記事"
+
+[next-post]
+other = "次の記事"
+
+[series]
+other = "シリーズ"
+
+[related-sections]
+other = "関連項目"
+
+[related-posts]
+other = "関連記事"
+
+[created]
+other = "作成"
+
+[modified]
+other = "更新"

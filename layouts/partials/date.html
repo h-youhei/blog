@@ -1,0 +1,8 @@
+{{ if not .Params.hide_date }}
+<p class="date">
+	{{ i18n "created" }} <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Date.Format .Site.Params.dateformat }}</time>
+	{{ if (gt .Params.lastmod  .Params.date) }}
+	{{ i18n "modified" }} <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format .Site.Params.dateformat }}</time>
+	{{ end }}
+</p>
+{{ end }}
