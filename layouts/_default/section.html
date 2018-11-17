@@ -1,3 +1,7 @@
+{{ define "meta" }}
+	<meta name="description" content="{{ .Params.description | markdownify | plainify | chomp }}">
+{{ end }}
+
 {{ define "link" }}
 	<link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Title }} - {{ .Site.Title }}">
 {{ end }}

@@ -3,8 +3,9 @@
 <nav>
 <ul class="horizon">
 <li><a href="{{ "/" | relLangURL }}">{{ i18n "home" }}</a></li>
-<li><a href="{{ "/all-posts/" | relLangURL }}">{{ i18n "all-posts" }}</a></li>
-<li><a href="{{ "/contact/" | relLangURL }}">{{ i18n "contact" }}</a></li>
+{{ partial "page" (.GetPage "posts") }}
+{{ with .GetPage "sections" }}{{ partial "page" . }}{{ end }}
+{{ partial "page" (.GetPage "contacts") }}
 </nav>
 </div>
 </header>
