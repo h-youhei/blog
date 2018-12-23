@@ -23,3 +23,6 @@ hide_date bool
 ## taxonomies
 ingridient<br>
 used in the recipe
+
+## requirement for build script
+- fd
