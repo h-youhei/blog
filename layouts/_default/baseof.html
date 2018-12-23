@@ -3,6 +3,7 @@
 	<head>
 		{{ .Hugo.Generator }}
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{{- block "meta" . }}{{ end -}}
 		<title>{{- block "title" . }}{{ .Title }} - {{ .Site.Title }}{{ end -}}</title>
 		{{ partial "alternate-lang.html" . -}}
