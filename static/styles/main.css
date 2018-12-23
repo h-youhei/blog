@@ -36,13 +36,13 @@ address { font-style: normal }
 
 p, li, dt, dd { line-height: 1.4 }
 
-h1 { font-size: 180% }
+h1 { font-size: 150% }
 h2 {
 	padding: 0.2em;
 	border-bottom-style: solid;
 	border-left-style: solid;
 	padding-left: 0.4em;
-	font-size: 150%;
+	font-size: 135%;
 }
 h3, h4 { font-size: 120% }
 h3 {
@@ -68,15 +68,6 @@ img { height: auto }
 .horizon > li { display: inline-block }
 .horizon > dt, .horizon > dd { display: inline-block }
 .horizon > dd { margin-left: 0 }
-
-.flex-container {
-	display: flex;
-	flex-wrap: wrap;
-}
-.flex-item {
-	min-width: 12em;
-	margin: 0 0.25em;
-}
 
 .button-link {
 	display: block;
