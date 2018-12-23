@@ -1,4 +1,8 @@
-RewriteEngine on
+RewriteEngine On
+
+#always on ssl
+RewriteCond %{HTTPS} !on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 #Can the browser handle gzip?
 RewriteCond %{HTTP:Accept-Encoding} gzip
@@ -30,4 +34,5 @@ RewriteCond %{REQUEST_FILENAME}\.gz -s
 	AddEncoding x-gzip .gz
 </FilesMatch>
 
+#workaround for caching behavior
 Header append Vary Accept-Encoding env=!dont-vary
