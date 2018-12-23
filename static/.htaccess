@@ -1,0 +1,33 @@
+RewriteEngine on
+
+#Can the browser handle gzip?
+RewriteCond %{HTTP:Accept-Encoding} gzip
+#Is there the gz file on the server?
+RewriteCond %{REQUEST_FILENAME}\.gz -s
+	#If both above is true, return gz file to the client
+	#html,css,javascript
+	RewriteRule ^.+\.(html|css|js) %{REQUEST_URI}.gz
+	#rss
+	RewriteRule ^index\.xml %{REQUEST_URI}.gz
+
+<FilesMatch "\.html\.gz$">
+	ForceType text/html
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.css\.gz$">
+	ForceType text/css
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.js\.gz$">
+	ForceType application/x-javascript
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "^index\.xml\.gz$">
+	ForceType application/rss+xml
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+Header append Vary Accept-Encoding env=!dont-vary
