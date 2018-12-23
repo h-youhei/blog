@@ -23,7 +23,9 @@
 {{- end -}}
 
 {{ define "h1" }}
-	{{ partial "breadcrumb.html" . }}
+	{{ if not .Parent.IsHome }}
+		{{ partial "breadcrumb.html" . }}
+	{{ end }}
 	<h1>{{ .Title }}{{ partial "rss.html" . }}</h1>
 {{ end }}
 
@@ -44,11 +46,11 @@
 {{ end }}
 
 {{ define "footer" }}
-	<footer id="page-footer">
-		{{ if not .Parent.IsHome }}
+	{{ if not .Parent.IsHome }}
+		<footer id="page-footer">
 			{{ partial "comment.html" . }}
-		{{ end }}
-		{{ partial "related.html" . }}
-		{{ partial "breadcrumb.html" . }}
-	</footer>
+			{{ partial "related.html" . }}
+			{{ partial "breadcrumb.html" . }}
+		</footer>
+	{{ end }}
 {{ end }}
