@@ -7,8 +7,8 @@ other = "福光 洋平"
 [search]
 other = "検索"
 
-[search-hint]
-other = "サイト内を検索"
+[cse]
+other = "Googleカスタム検索"
 
 [mail]
 other = "メール"

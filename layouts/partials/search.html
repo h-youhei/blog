@@ -1,0 +1,10 @@
+<form id="cse" action="//google.com/cse">
+	{{ if eq .Lang "ja" }}
+		<input type="hidden" name="cx" value="004530509831002523858:biazhanaqxs" />
+	{{ else if eq .Lang "en" }}
+		<input type="hidden" name="cx" value="004530509831002523858:ijnttluoxz4" />
+	{{ end }}
+	<input type="hidden" name="ie" value="UTF-8" />
+	<input type="text" name="q"  placeholder="{{ i18n "cse" }}" />
+	<input type="submit" name="sa" value="{{ i18n "search" }}" />
+</form>

@@ -5,10 +5,10 @@ other = "Ads"
 other = "Hukumitu Youhei"
 
 [search]
-other = "Search"
+other = "Go"
 
-[search-hint]
-other = "Search this website"
+[cse]
+other = "Google Custom Search"
 
 [mail]
 other = "Mail"

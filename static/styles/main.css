@@ -2,7 +2,7 @@
 
 /*** personalize ***/
 body { background-color: #f8f8f8 }
-h2, h3, h4 { border-color: #006600 }
+h1, h2, h3, h4 { border-color: #006600 }
 #site-header, #navbar {
 	font-family: sans-serif;
 	background-color: #005500;
@@ -50,7 +50,7 @@ h4 {
 	padding-left: 0.2em;
 }
 h2, h3 { border-width: 0.15em }
-h1, h2, h3, h4 { margin: 0.5em 0 }
+h2, h3, h4 { margin: 0.5em 0 }
 
 img { height: auto }
 
@@ -126,8 +126,9 @@ img { height: auto }
 #site-header li { margin: 0 0.3em }
 
 /*** footer ***/
-#privacy-policy { margin-top: 0 }
+#site-footer p { margin: 0.3em 0 }
 #copyright { margin-bottom: 0 }
+#cse input[type=submit] { width: 3em }
 
 /*** nav ***/
 #navbar ul, #site-header ul { margin: 0 }
