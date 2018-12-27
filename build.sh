@@ -10,6 +10,6 @@ cd public
 #delete unnecessary files generated
 rm -r ja
 
-fd -e html -e xml -e js -e css \
-	--exclude sitemap.xml \
+fd -e html -e js -e css \
 	-x gzip -k
+	# -e xml--exclude sitemap.xml \

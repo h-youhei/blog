@@ -12,7 +12,7 @@ RewriteCond %{REQUEST_FILENAME}\.gz -s
 	#html,css,javascript
 	RewriteRule ^.+\.(html|css|js) %{REQUEST_URI}.gz
 	#rss
-	RewriteRule ^index\.xml %{REQUEST_URI}.gz
+	# RewriteRule ^.*index\.xml %{REQUEST_URI}.gz
 
 <FilesMatch "\.html\.gz$">
 	ForceType text/html
@@ -29,10 +29,11 @@ RewriteCond %{REQUEST_FILENAME}\.gz -s
 	AddEncoding x-gzip .gz
 </FilesMatch>
 
-<FilesMatch "^index\.xml\.gz$">
-	ForceType application/rss+xml
-	AddEncoding x-gzip .gz
-</FilesMatch>
+# What's wrong?
+# <FilesMatch "index\.xml\.gz$">
+# 	ForceType application/rss+xml
+# 	AddEncoding x-gzip .gz
+# </FilesMatch>
 
 #workaround for caching behavior
 Header append Vary Accept-Encoding env=!dont-vary

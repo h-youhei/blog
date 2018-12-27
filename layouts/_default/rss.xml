@@ -1,17 +1,19 @@
 {{ $pages := slice }}
-{{ if .Parent }} {{/* articles under the section */}}
+{{ if .Parent }} {{/* Section page */}}
+	{{/* articles under the section */}}
 	{{ range .Site.RegularPages }}
 		{{ if hasPrefix .Dir $.Dir }}
 			{{ $pages = $pages | append  . }}
 		{{ end }}
 	{{ end }}
-{{ else }}
+{{ else }} {{/* top page */}}
 	{{ $pages = where .Data.Pages "Section" "!=" "" }}
 {{ end -}}
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>{{ .Title }} - {{ .Site.Title }}</title>
+		{{ if .Parent }}<title>{{ .Title }} - {{ .Site.Title }}</title>
+		{{ else }}<title>{{ .Site.Title }}</title>{{ end }}
 		<link>{{ .Permalink }}</link>
 		<description>最近の記事</description>
 		<generator>Hugo -- gohugo.io</generator>
