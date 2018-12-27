@@ -20,9 +20,6 @@ code { background-color: #e0f0e0 }
 /*** default element style ***/
 body { margin: 0 }
 
-ul {
-	list-style-position: inside;
-}
 ul ul { padding-left: 2em }
 dd { margin-left: 2em }
 
@@ -40,20 +37,20 @@ h1 { font-size: 150% }
 h2 {
 	padding: 0.2em;
 	border-bottom-style: solid;
-	border-left-style: solid;
-	padding-left: 0.4em;
+	padding-left: 0.2em;
 	font-size: 135%;
 }
 h3, h4 { font-size: 120% }
 h3 {
-	padding-left: 0.4em;
+	display: inline-block;
+	padding: 0 0.2em;
 	border-bottom-style: solid;
 }
 h4 {
 	padding-left: 0.2em;
-	border-left-style: solid;
 }
-h2, h3, h4 { border-width: 0.15em }
+h2, h3 { border-width: 0.15em }
+h1, h2, h3, h4 { margin: 0.5em 0 }
 
 img { height: auto }
 
@@ -78,11 +75,12 @@ img { height: auto }
 }
 .button-link:hover { text-decoration: underline }
 
-/* set list-style-type to reset nested count for list marker*/
-.dropdown-content ul {
-	margin: 0;
-	list-style-type: disc;
-}
+.dropdown-content ul { margin: 0 }
+/* set list-style-type to reset nested count for list marker.
+   since dropdown content is in navbar list. */
+.dropdown-content > ul { list-style-type: disc }
+.dropdown-content > ul ul { list-style-type: circle }
+.dropdown-content > ul ul ul { list-style-type: square }
 .dropdown-content {
 	display: none;
 	position: fixed;
@@ -96,14 +94,6 @@ img { height: auto }
 .dropdown-mark {
 	margin-left: 0.3em;
 	font-size: 0.8em;
-}
-
-#table-of-contents {
-	border-top: 1px solid;
-	border-bottom: 1px solid;
-}
-#table-of-contents > h2 {
-	border: none;
 }
 
 /*** base layout ***/
@@ -133,7 +123,7 @@ img { height: auto }
 }
 
 /*** header ***/
-#site-header li { margin: 0 0.5em }
+#site-header li { margin: 0 0.3em }
 
 /*** footer ***/
 #privacy-policy { margin-top: 0 }
@@ -156,18 +146,24 @@ img { height: auto }
 }
 
 /*** page ***/
+#table-of-contents {
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+#table-of-contents > h2 {
+	border: none;
+	margin-bottom: 0;
+}
+#table-of-contents ul { margin-top: 0 }
+
 #lang-switcher {
 	position: absolute;
-	right: 0;
+	right: 0.3em;
 	top: 0;
 }
 
-.date { padding-left: 1em }
-.date > time { margin-right: 1em }
-
 #page-footer {
 	border-top: 1px solid;
-	padding-left: 1em;
 }
 
 .tag > dt { display: inline-block }
@@ -186,14 +182,14 @@ img { height: auto }
 .sections { padding-left: 0 }
 .sections > li { display: inline-block }
 
-.breadcrumb { margin-bottom: 0 }
+.breadcrumb { margin: 0 }
 .breadcrumb > li::after {
 	content: '/';
 	margin: 0 0.5em;
 }
 
 #comment dd {
-	margin-left: 1em;
+	margin: 0 0.3em;
 	display: inline-block;
 }
 
