@@ -46,8 +46,14 @@ other = "Last"
 [comment-by]
 other = "Comment by"
 
-[by]
-other = ""
+[by-mail]
+other = "Mail"
+
+[by-twitter]
+other = "Twitter"
+
+[by-facebook]
+other = "Facebook"
 
 [title]
 other = "Title"

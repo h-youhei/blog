@@ -46,8 +46,14 @@ other = "最後へ"
 [comment-by]
 other = "コメントを"
 
-[by]
-other = "で"
+[by-mail]
+other = "メールで"
+
+[by-twitter]
+other = "Twitterで"
+
+[by-facebook]
+other = "Facebookで"
 
 [title]
 other = "タイトル"
