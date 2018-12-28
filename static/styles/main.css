@@ -50,7 +50,7 @@ h4 {
 	padding-left: 0.2em;
 }
 h2, h3 { border-width: 0.15em }
-h2, h3, h4 { margin: 0.5em 0 }
+h1, h2, h3, h4 { margin: 0.2em 0 }
 
 img { height: auto }
 
@@ -62,7 +62,10 @@ img { height: auto }
 }
 
 .horizon { padding: 0 }
-.horizon > li { display: inline-block }
+.horizon > li {
+	display: inline-block;
+	margin-right: 0.3em;
+}
 .horizon > dt, .horizon > dd { display: inline-block }
 .horizon > dd { margin-left: 0 }
 
@@ -146,53 +149,13 @@ img { height: auto }
 	width: 2em;
 }
 
-/*** page ***/
-#table-of-contents {
-	border-top: 1px solid;
-	border-bottom: 1px solid;
-}
-#table-of-contents > h2 {
-	border: none;
-	margin-bottom: 0;
-}
-#table-of-contents ul { margin-top: 0 }
-
-#lang-switcher {
-	position: absolute;
-	right: 0.3em;
-	top: 0;
-}
-
-#page-footer {
-	border-top: 1px solid;
-}
-
-.tag > dt { display: inline-block }
-.tag > dd {
-	display: inline-block;
-	margin: 0;
-	margin-right: 0.5em;
-}
-
-.tags {
-	column-width: 6.5em;
-	column-rule: 1px solid;
-	list-style: none;
-}
-
-.sections { padding-left: 0 }
-.sections > li { display: inline-block }
-
+/*** body ***/
 .breadcrumb { margin: 0 }
 .breadcrumb > li::after {
 	content: '/';
 	margin: 0 0.5em;
 }
-
-#comment dd {
-	margin: 0 0.3em;
-	display: inline-block;
-}
+#page-header ul, #page-header p { margin: 0.1em 0 }
 
 @media print {
 	#site-header,

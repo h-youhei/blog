@@ -26,13 +26,4 @@
 	margin-left: 1em;
 }
 
-.rss {
-	display: inline-block;
-	margin: 0 0.5em;
-	color: #ED4F00;
-}
-/* fontsize for: hx * (hx .rss) = 100% */
-h1 .rss { font-size: 66.7% }
-h2 .rss { font-size: 74.1% }
-h3 .rss, h4 .rss { font-size: 83.3% }
-
+#rss a{ color: #ED4F00 }

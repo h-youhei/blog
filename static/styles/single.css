@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+#table-of-contents  {
+	border: 1px solid;
+	padding: 0.2em 0;
+}
+#table-of-contents > h2 {
+	font-size: 120%;
+	border: none;
+	margin: 0;
+}
+
+#page-footer {
+	border-top: 1px solid;
+}
+
+.tag > dt { display: inline-block }
+.tag > dd {
+	display: inline-block;
+	margin: 0;
+	margin-right: 0.5em;
+}
+
+.tags {
+	column-width: 6.5em;
+	column-rule: 1px solid;
+	list-style: none;
+}
+
+.sections { padding-left: 0 }
+.sections > li { display: inline-block }
+
+#comment dd {
+	margin: 0 0.3em;
+	display: inline-block;
+}

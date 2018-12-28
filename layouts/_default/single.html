@@ -8,6 +8,10 @@
 	{{ end }}
 {{ end }}
 
+{{ define "style" }}
+	<link href="{{ "/styles/single.css" | relURL }}" rel="stylesheet">
+{{ end }}
+
 {{ define "title" }}
 	{{- if .Params.hide_section_in_title -}}
 		{{ .Title }} - {{ .Site.Title }}
@@ -26,13 +30,13 @@
 	{{ if not .Parent.IsHome }}
 		{{ partial "breadcrumb.html" . }}
 	{{ end }}
-	<h1>{{ .Title }}{{ partial "rss.html" . }}</h1>
+	<h1>{{ .Title }}</h1>
 {{ end }}
 
 {{ define "header" }}
-	<div id="about" class="clearfix">
+	{{ if not .Params.hide_date }}
 		{{ partial "date.html" . }}
-	</div>
+	{{ end }}
 	{{ if .Params.toc }}
 		<nav id="table-of-contents">
 			<h2>{{ i18n "contents"}}</h2>

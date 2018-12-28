@@ -1,7 +1,3 @@
-{{- if .IsTranslated }}
-<div class="clearfix">
 {{- range .Translations | first 1 -}}
-<p id="lang-switcher"><a hreflang="{{ .Lang }}" href="{{ .RelPermalink }}" rel="alternate">{{ .Site.Language.LanguageName }}</a></p>
+	<li id="lang-switcher"><a hreflang="{{ .Lang }}" href="{{ .RelPermalink }}" rel="alternate">{{ .Site.Language.LanguageName }}</a></li>
 {{- end }}
-</div>
-{{- end -}}

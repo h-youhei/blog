@@ -14,7 +14,7 @@
 	<link href="{{ "/styles/list.css" | relURL }}" rel="stylesheet">
 {{ end }}
 
-{{ define "h1" -}} <h1>{{ .Site.Title }}{{ partial "rss.html" . }}</h1> {{- end }}
+{{ define "h1" -}} <h1>{{ .Site.Title }}</h1> {{- end }}
 
 {{ define "main" }}
 	{{ .Content }}
