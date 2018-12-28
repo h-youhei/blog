@@ -1,10 +1,8 @@
 <li><dl>
-	<div class="horizon">
-		<dt><a href="{{ .RelPermalink }}">{{ .Title }}</a></dt>
-		<dd class="date">
+	<dt><a href="{{ .RelPermalink }}">{{ .Title }}</a></dt>
+	<dd class="date">
 		<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format .Site.Params.dateformat }}</time>
-		</dd>
-	</div>
+	</dd>
 	<dd>
 		{{ if .Params.description }}
 			<p>

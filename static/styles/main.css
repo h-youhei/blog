@@ -20,8 +20,8 @@ code { background-color: #e0f0e0 }
 /*** default element style ***/
 body { margin: 0 }
 
-ul ul { padding-left: 2em }
-dd { margin-left: 2em }
+ul ul { padding-left: 1em }
+dd { margin-left: 1em }
 
 code { font-family: monospace }
 pre > code {
