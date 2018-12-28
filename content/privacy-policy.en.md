@@ -1,7 +1,7 @@
 +++
 title = "Privacy Policy"
 description = ""
-date = 2017-08-08T18:37:38+09:00
+date = 2018-11-10T19:47:52+09:00
 draft = false
 notice = ""
 +++
@@ -13,6 +13,7 @@ You will provide your e-mail address to me when you contact me.
 The e-mail is only used to reply to your message.
 
 ## Google Adsense
+
 This website display ads by Google Adsense.
 
 [Third party vendors](https://support.google.com/dfp_premium/answer/94149), including Google, use cookies to serve ads based on a user's prior visits to this websites or other websites.

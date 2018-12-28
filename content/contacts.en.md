@@ -1,9 +1,10 @@
 +++
 title = "Contact"
 description = """
+Mail, SNS, Github
 """
-date = 2018-05-31T16:15:20+09:00
 hide_date = true
+style = [ "contact.css" ]
 +++
 <!--more-->
 
@@ -14,6 +15,7 @@ hide_date = true
 : @hkmt_yh
 
 [Facebook][facebook]
+: Hukumitu Youhei
 
 [Github][github]
 : @h-youhei
