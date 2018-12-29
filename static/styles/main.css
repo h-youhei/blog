@@ -156,6 +156,7 @@ img { height: auto }
 	margin: 0 0.5em;
 }
 #page-header ul, #page-header p { margin: 0.1em 0 }
+#page-header { border-bottom: 1px solid }
 
 @media print {
 	#site-header,
