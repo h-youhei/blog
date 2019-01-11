@@ -52,7 +52,11 @@ h4 {
 h2, h3 { border-width: 0.15em }
 h1, h2, h3, h4 { margin: 0.2em 0 }
 
-img { height: auto }
+img {
+	max-width: 100%;
+	height: auto;
+}
+figcaption p { margin: 0 }
 
 /*** common ***/
 .clearfix::after {
@@ -107,7 +111,6 @@ img { height: auto }
 	padding: 0.5em;
 	max-width: 39em;
 }
-.inner img { max-width: 39em }
 
 #navbar {
 	position: fixed;
