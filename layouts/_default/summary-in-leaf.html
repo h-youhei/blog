@@ -1,15 +1,13 @@
-<li><dl>
-	<dt><a href="{{ .RelPermalink }}">{{ .Title }}</a></dt>
-	<dd class="date">
+<li>
+	<h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+	<p class="date">
 		<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format .Site.Params.dateformat }}</time>
-	</dd>
-	<dd>
-		{{ if .Params.description }}
-			<p>
-				{{ .Params.description | markdownify }}
-			</p>
-		{{ else }}
-			{{ .Summary }}
-		{{ end }}
-	</dd>
-</dl></li>
+	</p>
+	{{ if .Params.description }}
+		<p>
+			{{ .Params.description | markdownify }}
+		</p>
+	{{ else }}
+		{{ .Summary }}
+	{{ end }}
+</li>

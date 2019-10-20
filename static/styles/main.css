@@ -68,7 +68,6 @@ figcaption p { margin: 0 }
 .horizon { padding: 0 }
 .horizon > li {
 	display: inline-block;
-	margin-right: 0.3em;
 }
 .horizon > dt, .horizon > dd { display: inline-block }
 .horizon > dd { margin-left: 0 }
@@ -154,7 +153,7 @@ figcaption p { margin: 0 }
 
 /*** body ***/
 .breadcrumb { margin: 0 }
-.breadcrumb > li::after {
+.breadcrumb > li:not(:last-child)::after {
 	content: '/';
 	margin: 0 0.5em;
 }

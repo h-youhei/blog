@@ -4,7 +4,7 @@
 	list-style-type: none;
 	padding-left: 0;
 }
-.articles dt { font-weight: bold }
+.articles h3 { border-bottom: none }
 .articles .date { margin: 0 }
 .articles p { margin: 0.2em 0 }
 .articles > li { margin: 0.5em }
