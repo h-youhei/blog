@@ -1,8 +1,12 @@
-<dl id="sections">{{ range .Sections }}
+<dl id="sections">
+{{ range .Sections }}
+	{{ if not (or .Params.hidden .Params.Draft) }}
 	<dt>{{ partial "h.html" . }}</dt>
-	{{ range .Sections }}
-		{{ if not (or .Params.hidden .Params.Draft) }}
-			<dd>{{ partial "h.html" . }}</dd>
+		{{ range .Sections }}
+			{{ if not (or .Params.hidden .Params.Draft) }}
+	<dd>{{ partial "h.html" . }}</dd>
+			{{ end }}
 		{{ end }}
 	{{ end }}
-{{ end }}</dl>
+{{ end }}
+</dl>
