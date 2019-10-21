@@ -1,4 +1,4 @@
 +++
-title = "卵料理"
+title = "卵"
 weight = 1
 +++
