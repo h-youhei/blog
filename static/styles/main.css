@@ -151,7 +151,7 @@ figcaption p { margin: 0 }
 .breadcrumb { margin: 0 }
 .breadcrumb > li:not(:last-child)::after {
 	content: '/';
-	margin: 0 0.5em;
+	margin: 0 0.3em;
 }
 #page-header ul, #page-header p { margin: 0.1em 0 }
 #page-header { border-bottom: 1px solid }
