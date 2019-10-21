@@ -19,10 +19,16 @@
 		{{ partial "header.html" . -}}
 		<main class="inner">
 			<header id="page-header">
-				{{- block "h1" . }}
-					<h1>{{ .Title }}</h1>
-				{{- end -}}
-				{{ partial "alternate.html" . }}
+				{{- block "breadcrumb" . }}{{- end -}}
+				<div class="clearfix">
+					<div id="title">
+					{{- block "h1" . }}
+						<h1>{{ .Title }}</h1>
+					{{- end -}}
+					{{ partial "rss.html" . }}
+					</div>
+				{{ partial "lang-switcher.html" . }}
+				</div>
 				{{- block "header" . }}{{ end -}}
 			</header>
 			{{- block "main" . }}{{ end -}}

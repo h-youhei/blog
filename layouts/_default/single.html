@@ -26,10 +26,13 @@
 	{{- end }}
 {{- end -}}
 
-{{ define "h1" }}
+{{ define "breadcrumb" }}
 	{{ if not .Parent.IsHome }}
 		{{ partial "breadcrumb.html" . }}
 	{{ end }}
+{{ end }}
+
+{{ define "h1" }}
 	<h1>{{ .Title }}</h1>
 {{ end }}
 

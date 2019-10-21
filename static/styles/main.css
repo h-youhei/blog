@@ -35,22 +35,18 @@ p, li, dt, dd { line-height: 1.4 }
 
 h1 { font-size: 150% }
 h2 {
-	padding: 0.2em;
+	padding: 0.1em 0;
 	border-bottom-style: solid;
-	padding-left: 0.2em;
 	font-size: 135%;
 }
 h3, h4 { font-size: 120% }
 h3 {
 	display: inline-block;
-	padding: 0 0.2em;
 	border-bottom-style: solid;
 }
-h4 {
-	padding-left: 0.2em;
-}
 h2, h3 { border-width: 0.15em }
-h1, h2, h3, h4 { margin: 0.2em 0 }
+h1 { margin: 0.3em 0 }
+h2, h3, h4 { margin: 0.2em 0 }
 
 img {
 	max-width: 100%;
@@ -159,6 +155,10 @@ figcaption p { margin: 0 }
 }
 #page-header ul, #page-header p { margin: 0.1em 0 }
 #page-header { border-bottom: 1px solid }
+#page-header h1, #rss { display: inline-block }
+#rss { padding-left: 0.2em }
+#title { float: left }
+#lang-switcher { text-align: right }
 
 @media print {
 	#site-header,

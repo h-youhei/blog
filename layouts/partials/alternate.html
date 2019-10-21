@@ -1,7 +1,0 @@
-{{ if or (.OutputFormats.Get "rss") (.IsTranslated) }}
-	<ul id="alternate" class="horizon">
-		{{ partial "rss.html" . }}
-		{{ partial "lang-switcher" . }}
-	</ul>
-{{ end }}
-

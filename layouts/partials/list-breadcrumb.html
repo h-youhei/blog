@@ -1,6 +1,6 @@
-{{ define "list-breadcrumb" }}
+{{ define "recurse-list-breadcrumb" }}
 	{{ if .Parent }}
-		{{ template "list-breadcrumb" .Parent }}
+		{{ template "recurse-list-breadcrumb" .Parent }}
 	{{ end }}
 	{{- if and (not .IsHome) (not .Params.hidden) }}
 		{{ partial "page" . }}
@@ -9,6 +9,6 @@
 
 {{ if .Parent }}
 	<ol class="breadcrumb horizon">
-		{{ template "list-breadcrumb" .Parent }}
+		{{ template "recurse-list-breadcrumb" .Parent }}
 	</ol>
 {{ end }}

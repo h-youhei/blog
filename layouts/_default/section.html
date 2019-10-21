@@ -10,8 +10,11 @@
 	<link href="{{ "/styles/list.css" | relURL }}" rel="stylesheet">
 {{ end }}
 
-{{ define "h1" }}
+{{ define "breadcrumb" }}
 	{{ partial "breadcrumb.html" . }}
+{{ end }}
+
+{{ define "h1" }}
 	<h1>{{ .Title }}</h1>
 {{ end }}
 
