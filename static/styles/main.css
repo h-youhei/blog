@@ -32,6 +32,7 @@ pre > code {
 address { font-style: normal }
 
 p, li, dt, dd { line-height: 1.4 }
+p { margin-top: 0.5em }
 
 h1 { font-size: 150% }
 h2 {
@@ -48,6 +49,11 @@ h2, h3 { border-width: 0.15em }
 h1 { margin: 0.3em 0 }
 h2, h3, h4 { margin: 0.2em 0 }
 
+figure {
+	max-width: 18em;
+	display: inline-block;
+	margin: 0.5em;
+}
 img {
 	max-width: 100%;
 	height: auto;
