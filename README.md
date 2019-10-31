@@ -24,5 +24,8 @@ hide_date bool
 ingridient<br>
 used in the recipe
 
+## Shortcodes
+[see here](layouts/shortcodes/README.md)
+
 ## requirement for build script
 - fd

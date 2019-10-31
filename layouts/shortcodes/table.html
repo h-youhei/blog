@@ -1,0 +1,60 @@
+{{ $filename := .Get 0 }}
+{{ with .Get "file" }}
+	{{ $filename = . }}
+{{ end }}
+{{ $sep := "," }}
+{{ with .Get "sep" }}
+	{{ $sep = . }}
+{{ end }}
+{{ $data := getCSV $sep "content/" $.Page.File.Dir $filename }}
+
+{{ $v := false }}
+{{ $h := true }}
+{{ with .Get "v" }}
+	{{ if or (eq . "t") (eq . "true") (eq . "y") (eq . "yes")}}
+		{{ $v = true }}
+	{{ end }}
+{{ end }}
+{{ with .Get "h" }}
+	{{ if or (eq . "f") (eq . "false") (eq . "n") (eq . "no")}}
+		{{ $h = false }}
+	{{ end }}
+{{ end }}
+
+<table>
+{{ with .Get "caption" }}
+	<caption>{{ . }}</caption>
+{{ end }}
+{{ range first 1 $data }}
+	<tr>
+	{{ range first 1 . }}
+		{{ if or $v $h }}
+		<th>{{ . }}</th>
+		{{ else }}
+		<td>{{ . }}</td>
+		{{ end }}
+	{{ end }}
+	{{ range after 1 . }}
+		{{ if $h }}
+		<th>{{ . }}</th>
+		{{ else }}
+		<td>{{ . }}</td>
+		{{ end }}
+	{{ end }}
+	</tr>
+{{ end }}
+{{ range after 1 $data }}
+	<tr>
+	{{ range first 1 . }}
+		{{ if $v }}
+		<th>{{ . }}</th>
+		{{ else }}
+		<td>{{ . }}</td>
+		{{ end }}
+	{{ end }}
+	{{ range after 1 . }}
+		<td>{{ . }}</td>
+		{{ end }}
+	</tr>
+	{{ end }}
+</table>
