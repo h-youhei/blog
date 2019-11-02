@@ -4,6 +4,7 @@ description = """
 非24時間睡眠覚醒症候群との闘病記
 """
 date = 2018-12-21T20:04:13+09:00
+aliases = [ "/health/non24/" ]
 toc = true
 +++
 ## 症状 {#symptom}
