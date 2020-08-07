@@ -8,7 +8,12 @@ name = "福光洋平"
 email = "hukumitu.youhei@gmail.com"
 
 [taxonomies]
-ingridient = "ingridients"
+# ingridient = "ingridients"
+
+[markup]
+	[markup.tableOfContents]
+	startLevel = 2
+	endLevel = 4
 
 [Languages.ja]
 title = "福光洋平"
@@ -16,7 +21,6 @@ hasCJKLanguage = true
 languageName = "日本語"
 languageCode = "ja-jp"
 dateformat = "2006年1月2日"
-
 
 [Languages.en]
 title = "Hukumitu Youhei"
