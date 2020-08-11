@@ -31,6 +31,12 @@ other = "Recent Canges"
 [home]
 other = "Home"
 
+[top]
+other = "Top"
+
+[buttom]
+other = "Buttom"
+
 [next]
 other = "Next"
 

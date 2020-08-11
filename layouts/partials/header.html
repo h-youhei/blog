@@ -6,6 +6,8 @@
 {{ partial "page" (.GetPage "posts") }}
 {{ with .GetPage "sections" }}{{ partial "page" . }}{{ end }}
 {{ partial "page" (.GetPage "contacts") }}
+<li><a href="#site-footer">{{ i18n "buttom"}}</a></li>
+</ul>
 </nav>
 </div>
 </header>

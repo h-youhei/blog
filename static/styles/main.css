@@ -3,19 +3,14 @@
 /*** personalize ***/
 body { background-color: #f8f8f8 }
 h1, h2, h3, h4 { border-color: #006600 }
-#site-header, #navbar {
+#site-header {
 	font-family: sans-serif;
 	background-color: #005500;
 }
 #site-footer { background-color: #482800 }
-#site-header a,
-#navbar a, #navbar .button-link,
-#site-footer, #site-footer a { color: #f8f8f8 }
+#site-header a, #site-footer, #site-footer a { color: #f8f8f8 }
 
 code { background-color: #e0f0e0 }
-
-#navbar .dropdown-content a { color: #000000 }
-.dropdown-content { background-color: #f8f8f8 }
 
 /*** default element style ***/
 body { margin: 0 }
@@ -73,7 +68,6 @@ table caption {
 	font-size: 110%;
 }
 
-
 th, td { padding: 0 0.5em }
 tr:nth-child(even) { background-color: #e8e8e8 }
 /* show diagonal line for empty cells */
@@ -100,36 +94,6 @@ th, td { text-align: center }
 .horizon > dt, .horizon > dd { display: inline-block }
 .horizon > dd { margin-left: 0 }
 
-.button-link {
-	display: block;
-	padding: 0.25em 0.5em;
-	margin: 0 0.1em;
-	border: solid 1px;
-	cursor: pointer;
-}
-.button-link:hover { text-decoration: underline }
-
-.dropdown-content ul { margin: 0 }
-/* set list-style-type to reset nested count for list marker.
-   since dropdown content is in navbar list. */
-.dropdown-content > ul { list-style-type: disc }
-.dropdown-content > ul ul { list-style-type: circle }
-.dropdown-content > ul ul ul { list-style-type: square }
-.dropdown-content {
-	display: none;
-	position: fixed;
-	margin: 0 auto;
-	padding: 0.5em;
-	overflow-y: auto;
-}
-.show {
-	display: inline-block;
-}
-.dropdown-mark {
-	margin-left: 0.3em;
-	font-size: 0.8em;
-}
-
 /*** base layout ***/
 /* position: relative is anchor for position: absolute */
 .inner {
@@ -139,45 +103,15 @@ th, td { text-align: center }
 	max-width: 39em;
 }
 
-#navbar {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 3em;
-}
-#site-footer{ margin-bottom: 3em }
-#navbar .dropdown-content {
-	bottom: 3em;
-	box-shadow: 0 -1px 10px;
-	max-width: 39em;
-	left: 0;
-	right: 0;
-	max-height: 70vh;
-}
-
-/*** header ***/
-#site-header li { margin: 0 0.3em }
+/*** navigation on header and footer ***/
+#site-header ul, #site-footer ul { margin: 0 }
+#site-header li, #site-footer li { margin: 0 0.3em }
 
 /*** footer ***/
 #site-footer p { margin: 0.3em 0 }
 #copyright { margin-bottom: 0 }
-#cse input[type=submit] { width: 3em }
-
-/*** nav ***/
-#navbar ul, #site-header ul { margin: 0 }
-#navbar {
-	white-space: nowrap;
-	overflow: auto;
-}
-#navbar a { text-decoration: none }
-#navbar .dropdown-content a {
-	white-space: normal;
-	text-decoration: underline;
-}
-.mark {
-	text-align: center;
-	width: 2em;
-}
+#cse { margin: 0.4em }
+#cse input[type=submit] { width: 4em }
 
 /*** body ***/
 .breadcrumb { margin: 0 }

@@ -31,6 +31,12 @@ other = "最近の更新"
 [home]
 other = "ホーム"
 
+[top]
+other = "上へ"
+
+[buttom]
+other = "下へ"
+
 [next]
 other = "次へ"
 

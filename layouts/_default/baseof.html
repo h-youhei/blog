@@ -10,9 +10,6 @@
 		{{- block "link" . }}{{ end -}}
 		{{ partial "link.html" . }}
 		{{- block "style" . }}{{ end -}}
-		{{- if .Params.toc -}}
-			<script src="{{ "/scripts/dropdown.js" | relURL }}" async></script>
-		{{- end }}
 		{{- block "script" . }}{{ end -}}
 	</head>
 	<body>
@@ -34,7 +31,6 @@
 			{{- block "main" . }}{{ end -}}
 			{{- block "footer" . }}{{ end -}}
 		</main>
-		{{ partial "navbar.html" . -}}
 		{{ partial "footer.html" . -}}
 	</body>
 </html>

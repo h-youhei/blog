@@ -1,5 +1,12 @@
 <footer id="site-footer">
 <div class="inner">
+<ul class="horizon">
+<li><a href="{{ "/" | relLangURL }}">{{ i18n "home" }}</a></li>
+{{ partial "page" (.GetPage "posts") }}
+{{ with .GetPage "sections" }}{{ partial "page" . }}{{ end }}
+{{ partial "page" (.GetPage "contacts") }}
+<li><a href="#">{{ i18n "top" }}</a></li>
+</ul>
 {{ partial "search" . }}
 <p id="privacy-policy"><a href="{{ "/privacy-policy/" | relLangURL }}">{{ i18n "privacy-policy" }}</a></p>
 <p id="copyright"><small id="copyright">&copy;
