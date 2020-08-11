@@ -2,7 +2,7 @@
 {{ if .Parent }} {{/* Section page */}}
 	{{/* articles under the section */}}
 	{{ range .Site.RegularPages }}
-		{{ if hasPrefix .Dir $.Dir }}
+		{{ if hasPrefix .File.Dir $.File.Dir }}
 			{{ $pages = $pages | append  . }}
 		{{ end }}
 	{{ end }}
