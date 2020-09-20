@@ -10,10 +10,12 @@ email = "hukumitu.youhei@gmail.com"
 [taxonomies]
 # ingridient = "ingridients"
 
-[markup]
-	[markup.tableOfContents]
-	startLevel = 2
-	endLevel = 4
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 4
+
+[markup.goldmark.renderer]
+unsafe = true
 
 [Languages.ja]
 title = "福光洋平"
