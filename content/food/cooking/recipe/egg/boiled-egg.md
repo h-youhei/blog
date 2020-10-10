@@ -8,10 +8,12 @@ toc = true
 +++
 <!--more-->
 
-{{< figure src="boiled-egg.jpg"
+<div class="columns-2">
+{{< figure src="boiled-egg.jpg" class="column"
 	caption="つまむとへこむゆで卵">}}
-{{< figure src="cut-boiled-egg.jpg"
+{{< figure src="cut-boiled-egg.jpg" class="column"
 	caption="とろとろな黄身">}}
+</div>
 
 ## 手順
 1. 鍋に水を入れて、火にかける。

@@ -6,6 +6,17 @@ description = """
 date = 2019-11-02
 toc = true
 +++
+<!--more-->
+
+## お知らせ
+ある程度タイピングスピードが速くなると左右の順番を正確に打ち分けるのが難しかったのと、シフトするキーを決めて左右どちらの順番で打つか決めるという手順を1つにまとめて打てるようになる気配がしなかったので「ラムネ。配列」を元にした新しい配列を作りました。
+
+[チョキコード]({{< ref "tyoki-chord.md" >}})
+
+行(子音)と隣のキーを同時押しすることでシフトする配列です。
+
+## 配列図
+
 {{< figure src="ramune-input.png"
 	class="full" >}}
 
@@ -89,14 +100,15 @@ COMMIT_AT_PUNCTUATIONで[句読点で確定](#commit-at-punctuation)を有効に
 多くの既存の配列を参考にさせていただきました。ありがとうございます。とくに影響を受けた配列を挙げさせていただきます。
 
 - [新JIS配列][new jis]：単打面の配列
-- [薙刀式][naginata]：人差し指と中指を重視すること
+- [カタナ式][katana]、[薙刀式][naginata]：人差し指と中指を重視すること
 - [よだか配列][yodaka]：かな入力と行段入力の組み合わせ
 - [けいならべ][keinarabe]：二重母音を打ちやすいように配置すること
-<!--more-->
+
 [qmk firmware]:https://github.com/qmk/qmk_firmware
-[qmk ergodox]:https://github.com/h-youhei/qmk_keymap
+[qmk ergodox]:https://github.com/h-youhei/qmk_keymap/tree/557e227ae63efe0255faaf0b095bd4ae2bb70434
 [100man]:https://kouy.exblog.jp/9731073
 [new jis]:https://ja.wikipedia.org/wiki/%E6%96%B0JIS%E9%85%8D%E5%88%97
+[katana]:http://oookaworks.seesaa.net/article/455391788.html
 [naginata]:http://oookaworks.seesaa.net/article/456099128.html
 [yodaka]:https://github.com/semialt/yodaka
 [keinarabe]:http://web1.nazca.co.jp/kouy/keinarabe/
