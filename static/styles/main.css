@@ -10,7 +10,7 @@ h1, h2, h3, h4 { border-color: #006600 }
 #site-footer { background-color: #482800 }
 #site-header a, #site-footer, #site-footer a { color: #f8f8f8 }
 
-code { background-color: #e0f0e0 }
+code { background-color: #eaeaea }
 
 /*** default element style ***/
 body { margin: 0 }
@@ -19,6 +19,11 @@ ul ul { padding-left: 1em }
 dd { margin-left: 1em }
 
 code { font-family: monospace }
+pre {
+	tab-size: 4;
+	-moz-tab-size:4;
+	white-space: pre-wrap;
+}
 pre > code {
 	display: block;
 	padding: 0.5em;
