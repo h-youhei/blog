@@ -1,9 +1,11 @@
 +++
 title = "Mod Tapキーのタップで通常のキーコードではできないことをする"
 description = """
+Mod Tapキーのタップでは通常のキーコードしか送れない。Mod Tapを使いながら複雑な処理をしたいときはどうすればいいか。
 """
 date = 2020-10-16T09:15:01+09:00
 toc = true
+syntax = true
 +++
 <!--more-->
 ## Mod Tapの使い方
@@ -23,12 +25,12 @@ keymap定義の中で`LSFT_T(KC_SPC)`のように使う。
 `process_record_user()`内でtrueを返すと通常の処理が実行される。falseを返すと通常の処理は実行されない。
 
 ## 本題の解説
-```
+```c
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	...
 	switch(keycode) {
 		...
-		// MOD-TAPのキーコードを捕捉
+		// MOD TAPのキーコードを捕捉
 		case LSFT_T(KC_SPC):
 		// 長押しの場合はtap.countが0
 		// タップの場合は1以上
@@ -49,12 +51,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 ```
 
 ## タップでシフト側の文字を送る例
-```
+```c
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	...
 	switch(keycode) {
 		...
-		// MOD-TAPのキーコードを捕捉
+		// MOD TAPのキーコードを捕捉
 		// タップ側のキーコードは最後の8ビット以外は#defineマクロの展開のときに捨てられるのでJP_QUOTはKC_7と同じ扱いになってしまっている。
 		case RGUI_T(JP_QUOT):
 		// 長押しの場合はtap.countが0
