@@ -40,10 +40,12 @@
 /* CommentSingle */ .chroma .c1
 { color: #558888 }
 
-/* CommentSpecial */ .chroma .cs,
+/* CommentSpecial */ .chroma .cs
+{ color: #558888; font-weight: bold; }
+
 /* CommentPreproc */ .chroma .cp,
 /* CommentPreprocFile */ .chroma .cpf
-{ color: #558888; font-weight: bold; }
+{ color: #990099; font-weight: bold; }
 
 /* Other */ .chroma .x {  }
 /* Error */ .chroma .err { color: #a61717; background-color: #e3d2d2 }
