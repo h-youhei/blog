@@ -22,7 +22,7 @@
 	{{ .Content }}
 	<h2 id="recent-changes">{{ i18n "recent-changes" }}</h2>
 	<ul class="articles">
-		{{ range where .Site.RegularPages "Section" "!=" "" | first 10 -}}
+		{{ range where .Site.RegularPages.ByDate.Reverse "Section" "!=" "" | first 10 -}}
 			{{ .Render "summary" }}
 		{{- end -}}
 	</ul>

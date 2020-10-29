@@ -20,7 +20,7 @@
 
 {{ define "main" }}
 	<ul class="articles">
-		{{ range where .Site.RegularPages "Section" "!=" "" -}}
+		{{ range where .Site.RegularPages.ByDate.Reverse "Section" "!=" "" -}}
 			{{ .Render "summary" }}
 		{{- end -}}
 	</ul>

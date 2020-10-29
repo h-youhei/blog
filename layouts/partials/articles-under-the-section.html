@@ -1,4 +1,4 @@
-{{ range .Site.RegularPages }}
+{{ range .Site.RegularPages.ByDate.Reverse }}
 	{{ if hasPrefix .File.Dir $.File.Dir }}
 		{{ .Render "summary" }}
 	{{ end }}
