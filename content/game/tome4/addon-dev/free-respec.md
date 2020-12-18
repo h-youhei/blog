@@ -12,7 +12,7 @@ toc = true
 
 それを解決してくれるアドオンに「[Full Respecialization][full]」っていうステータス、タレント、カテゴリ、奥義を自由に振り直せるようにするアドオンがあるんだけど、ToME本体のバージョンが1.7系列に上がってから奥義を習得するときにエラーが出るようになってしまった。
 
-バグ修正ついでに、ステータスを初期値以下にしてステータスポイント稼ぎができたり、はじめから覚えてるカテゴリや、イベントでカテゴリポイントを使わずに習得できるカテゴリを忘れてカテゴリポイント稼ぎができたりと悪用できる部分を封じたアドオンを作ることにした。
+バグ修正ついでに、ステータスを初期値以下にしてステータスポイント稼ぎができたり、はじめから覚えてるカテゴリや、イベントでカテゴリポイントを使わずに習得できるカテゴリを忘れてカテゴリポイント稼ぎができたり、Crefty Handsなど一時的に習得することで有利になる奥義を振り直しできたりと悪用できる部分を封じたアドオンを作ることにした。
 
 [ダウンロードはこちら][free]
 
@@ -113,7 +113,6 @@ function _M:learnType(tt, v)
 	-- カテゴリを忘れるとき
 	else
 		-- 略 覚えてないのは忘れることができない
-		
 		if (self.actor.__increased_talent_types[tt] or 0) > 0 then
 			-- 略 実行レベル補正の強化を取り消す処理
 		else
@@ -146,11 +145,21 @@ end
 ### 奥義
 `mod/dialogs/UberTalent.lua`の`use()`が奥義を変更するときに呼ばれる関数。これをsuperloadする。
 
+一時的に習得することで有利になる奥義の判定ではWrithing Ring of the Hunter(装備している間、奥義を一時的に習得できる指輪)のコードを参考にした。`tome-cults/overload/mod/dialogs/RingOfTheHunter.lua`
+
 ```lua
 local base_use = _M.use
 function _M:use(item)
 	-- 忘れるとき
 	if self.actor:knowTalent(item.talent) then
+		local t = self.actor:getTalentFromId(item.talent)
+		-- 一時的に習得することで有利になる奥義の振り直しを封じる
+		if t.cant_steal or (t.on_learn and not t.on_unlearn) or (t.on_unlearn and not t.on_learn) then
+			-- 第1引数はダイアログのタイトル。奥義の名前を表示する
+			engine.ui.Dialog:simplePopup(util.getval(item.rawname, item), "You cannot unlearn this talent!")
+			return
+		end
+
 		-- 第3引数をnilにすると忘れた奥義がオンオフ系だったときに解除する
 		self.actor:unlearnTalent(item.talent, nil, nil, {no_unlearn=true})
 		-- 覚えていた奥義を忘れるのをやっぱりやめたときに覚え直すために、今開いているウィンドウで忘れたことを保存しておく
@@ -171,10 +180,18 @@ function _M:use(item)
 end
 ```
 
-## やり残し
-Class Evolutionをテストできてない。
+振り直せなくした奥義がどれなのかを表示するために`mod/dialogs/UberTalent.lua`の`getTalentDesc()`をsuperloadしている。
 
-Crafty Handsとか一時的に習得することで有利になる奥義の振り直しを封じる。
+元の関数をそのままコピーしてタレント名と習得条件の間に以下のコードを入れた。
+```lua
+function _M:getTalentDesc(item)
+	...
+	local t = self.actor:getTalentFromId(item.talent)
+	if t.cant_steal or (t.on_learn and not t.on_unlearn) or (t.on_unlearn and not t.on_learn) then
+		text:add({"color","YELLOW"}, _t"This talent can alter the world in a permanent way; as such, you can never unlearn it once known.", {"color","LAST"}, true, true)
+	end
+	...
+```
 
 [full]:https://te4.org/games/addons/tome/FullRespec
 [free]:https://te4.org/games/addons/tome/free-respec
