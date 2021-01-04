@@ -1,5 +1,6 @@
 baseURL = "https://hkmtyh.com"
 defaultContentLanguage = "ja"
+disableLanguages = ["en"]
 
 [author]
 name = "福光洋平"

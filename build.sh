@@ -8,7 +8,7 @@ hugo --cleanDestinationDir --minify
 cd public
 
 #delete unnecessary files generated
-rm -r ja
+#rm -r ja
 
 fd -e html -e js -e css \
 	-x gzip -k
