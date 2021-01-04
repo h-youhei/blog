@@ -1,3 +1,4 @@
+{{ if not .Params.nolist }}
 <li>
 	<h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
 	<p class="date">
@@ -11,3 +12,4 @@
 		{{ .Summary }}
 	{{ end }}
 </li>
+{{ end }}

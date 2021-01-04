@@ -1,3 +1,4 @@
+{{ if not .Params.nolist }}
 <li>
 	{{ partial "list-breadcrumb.html" . }}
 	<h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
@@ -12,3 +13,4 @@
 		{{ .Summary }}
 	{{ end }}
 </li>
+{{ end }}
