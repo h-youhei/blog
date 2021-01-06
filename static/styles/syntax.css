@@ -32,6 +32,8 @@
 /* LiteralNumberOct */ .chroma .mo
 { color: #0055cc }
 
+/* NameLabel */ .chroma .nl { font-weight: bold }
+
 /* Operator */ .chroma .o { }
 
 /* Comment */ .chroma .c,
@@ -70,7 +72,6 @@
 /* NameEntity */ .chroma .ni { color: #800080 }
 /* NameException */ .chroma .ne { color: #990000; font-weight: bold }
 /* NameFunctionMagic */ .chroma .fm {  }
-/* NameLabel */ .chroma .nl { color: #990000; font-weight: bold }
 /* NameOther */ .chroma .nx {  }
 /* NameProperty */ .chroma .py {  }
 /* NameTag */ .chroma .nt { color: #000080 }
