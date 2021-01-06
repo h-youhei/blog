@@ -27,6 +27,9 @@ pre {
 pre > code {
 	display: block;
 	padding: 0.5em;
+	border: solid 0.1em;
+	background-color: #f8f8f8;
+	box-shadow: 0.1em 0.1em 0.4em;
 }
 
 address { font-style: normal }

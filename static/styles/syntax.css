@@ -1,8 +1,3 @@
-/* Background */ .chroma > code {
-	border: solid 0.1em;
-	background-color: #f8f8f8;
-}
-
 /* NameClass */ .chroma .nc,
 /* NameFunction */ .chroma .nf,
 /* NameNamespace */ .chroma .nn { color: #990099 }
