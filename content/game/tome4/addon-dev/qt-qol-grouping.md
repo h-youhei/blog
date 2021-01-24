@@ -26,7 +26,7 @@ Tinkerエスコート報酬で出現するAncient CaveとYeti Mussle Tissueと�
 注意：単体では機能しません。オリジナルの「[QuickTome QoL Changes][qt]」とともに有効にしてください。
 
 ## 実装
-オリジナルのアドオンではRod of Recallを使った後につくエフェクトの効果時間が過ぎたとき、各ゾーンの入口からワールドマップに出たときに`require("engine.Chat").new("qt-recall", 略):invoke()`が呼ばれて`data/chats`以下のnewの第1引数と同名のファイルをもとに対話形式のダイアログが作られるようになっている。よって`data/chats/qt-recall.lua`をoverloadすることで実装することになる。
+オリジナルのアドオンではRod of Recallを使った後につくエフェクトの効果時間が過ぎたときや各ゾーンの入口からワールドマップに出たときに`require("engine.Chat").new("qt-recall", 略):invoke()`が呼ばれて`data/chats`以下のnewの第1引数と同名のファイルをもとに対話形式のダイアログが作られるようになっている。よって`data/chats/qt-recall.lua`をoverloadすることで実装することになる。
 
 overloadはファイルの中身を置き換える以外にも特定のパスにファイルを置くことにも使うようで、オリジナルのアドオンでも`overload/data/chats/qt-recall.lua`に目的の処理が実装されている。これをoverloadするにはオリジナルのアドオンより後に読み込まれる必要がある。`init.lua`のweightが小さいほど先に読み込まれるのでオリジナルのアドオンよりweightを大きい値にする。
 
@@ -78,7 +78,7 @@ answerList = {
 `name`は表示名。\
 `cond`は[選択肢のフィルタリング](#選択肢のフィルタリング)で使う。\
 `zone`は[ゾーンを移動する処理](#ゾーンを移動する処理)で使う。\
-`wildx`と`wildy`は[ワールドマップ上でのプレイヤーの座標を移動したゾーンに合わせる](#ゾーンを移動する処理)のに使う。
+`wildx`と`wildy`は[ワールドマップ上でのプレイヤーの座標を移動したゾーンに合わせる](#ワールドマップ上でのプレイヤーの座標の調整)のに使う。
 ```lua
 zones = {
 	{
@@ -103,7 +103,7 @@ end
 - 特定の種族やクラスでしか入れないゾーンがある。
 - Zigurは魔法を習得していると入れない。
 
-などアドオンなしでは入れないゾーンは入れないままにしておきたいのでテレポートの選択肢から外す。
+など状況次第で入れないゾーンは入れないままにしておきたいのでテレポートの選択肢から外す。
 
 `engine/dialogs/Chat.lua`を見ると、選択肢を表示するかどうか判定する関数をanswersのcondに指定できるみたいだけど、オリジナルのアドオンではanswersに指定するテーブルanswerListの生成時にあらかじめ関数を評価してanswerListから弾いている。何度も同じ関数を評価するのもなんなのでこのアドオンでは関数ではなくbool値を使うことにした。
 
@@ -113,8 +113,8 @@ end
 -- アドオン名にはinit.luaのshort_nameを使う
 -- Ashes of Urh'Rokはashes-urhrok
 -- Embers of Rageはorcs
--- Forbidden Cultsはcults、
-game.__mod_info.addons["アドオン名"]
+-- Forbidden Cultsはcults
+game.__mod_info.addons["アドオン名"] ~= nil
 
 -- 現在遊んでいるキャンペーンの判定
 -- メインキャンペーンはMaj'Eyal
@@ -125,10 +125,11 @@ game:isCampaign("キャンペーン名")
 game.uniques["mod.class.NPC/NPC名"]
 game.uniques["mod.class.Object/アイテム名"]
 game.uniques["mod.class.Encounter/イベント名"]
--- といった形で値が帰ってくるかで判定に使う
+-- といった形で1が返ってくるかで判定に使う
 
 -- プレイヤーキャラクターの情報が入ったテーブルの取得
 local player = game:getPlayer(true)
+-- レベル
 player.level
 -- 種族
 player.descriptor.subrace
@@ -153,7 +154,7 @@ player:hasQuest("クエスト名")
 player:hasQuest("クエスト名"):isStatus(engine.Quest.DONE)
 -- クエストがいくつかの区切りに分かれているとき、その区切りまで完了しているか
 player:hasQuest("クエスト名"):isCompleted("区切り名")
--- エスコートクエストなどクエスト名がその度に変わって名前からは探しにくいときは、発生しているクエストの配列が利用できる。
+-- エスコートクエストなどクエスト名がその度に変わって名前からは探しにくいときは、発生しているクエスト一覧の配列が利用できる。
 player.quests
 -- エスコートクエストでAncient Caveの場所を教えてもらったかどうかの例
 local tinkerCond = false
@@ -168,12 +169,30 @@ local tinkerCond = false
 ``` lua
 function changeZone(zone) return function()
 	if not zone.dontAdjustWildpos then
-		-- ここでは省いているgame.state.qt_recall_onLevelLoadCountはonLevelLoadを登録した後ワールドマップに移動する前に他のonLevelLoadが登録されて…以下繰り返しの対処みたい。実際どうなるのかは分かってない
+		-- ゾーン移動した後ワールドマップに出る前にセーブデータのロードを挟むと、クロージャーの共有スコープで渡した情報が消える。onLevelLoadに渡す関数に渡される引数ではあらかじめ決められた情報しか受け取ることができない。そのためセーブデータとしても残る変数にワールドマップ上のプレイヤーの座標を調整するために必要な情報を保存しておく。
+		game.state.qt_recall_zone = zone
+		-- game.state.qt_recall_onLevelLoadCountはonLevelLoadを登録した後ワールドマップに移動する前に他のonLevelLoadが登録されて…が何度か繰り返されたときの対処。
+		game.state.qt_recall_onLevelLoadCount = (game.state.qt_recall_onLevelLoadCount or 0) + 1
 		-- ワールドマップ上のプレイヤーの座標をテレポートしたゾーンの入口に合わせる処理
-		game:onLevelLoad("wilderness-1", function(_zone, level)
-			local p = game:getPlayer(true)
+		game:onLevelLoad("wilderness-1", updateWildpos)
+	end
+	-- 実際にテレポートする処理、第1引数はゾーンの階層
+	game:changeLevel(zone.level or 1, zone.zone)
+end end
+```
+
+### ワールドマップ上でのプレイヤーの座標の調整
+```lua
+local function updateWildpos(zone, level)
+	-- game.state.qt_recall_onLevelLoadCountはonLevelLoadを登録した後ワールドマップに移動する前に他のonLevelLoadが登録されて…が何度か繰り返されたときの対処。onLevelLoadに登録された順にupdateWildposが呼び出されて、最後に呼び出されたときにgame.state.qt_recall_onLevelLoadCountが0になって処理が実行される。
+	local lc = game.state.qt_recall_onLevelLoadCount - 1
+	game.state.qt_recall_onLevelLoadCount = lc
+	if lc == 0 then
+		local p = game:getPlayer(true)
+		local z = game.state.qt_recall_zone
+		if z then
 			-- 新しくゲームを始める度に違う場所に生成されるゾーンはワールドマップの全座標を総当りしてそのゾーンの入口を見つけて、その座標にプレイヤーを移動する
-			if zone.rand then
+			if z.rand then
 				for x=0,game.level.map.w-1 do
 					for y=0,game.level.map.h-1 do
 						local grid = game.level.map:checkAllEntities(x,y,"change_zone")
@@ -186,22 +205,17 @@ function changeZone(zone) return function()
 				end
 				::loopend::
 			-- 生成場所が決まっているゾーンはあらかじめゲーム内のデバッグモードで座標を調べて書いておき、直接座標を指定する。
-			else
-				if zone.wildx and zone.wildy then
-					p.wild_x = zone.wildx
-					p.wild_y = zone.wildy
-				end
+			elseif z.wildx and z.wildy then
+				p.wild_x = z.wildx
+				p.wild_y = z.wildy
 			end
-			if p.level >= 14 and isMajEyal and not p:hasQuest("lightning-overload") then
-				p:grantQuest("lightning-overload")
-			end
-		end)
+		end
+		if p.level >= 14 and isMajEyal and not p:hasQuest("lightning-overload") then
+			p:grantQuest("lightning-overload")
+		end
 	end
-	-- 実際にテレポートする処理、第1引数はゾーンの階層
-	game:changeLevel(zone.level or 1, zone.zone)
-end end
+end
 ```
-
 ### 目的の選択肢を探しやすくする
 ゾーンをアルファベット順に並べる。
 特別先に表示されてほしいゾーンは[ゾーンの情報を保存するテーブル](#選択肢の生成)でsortに0より小さい数字を入れる。sortが小さいほど先に表示されて、同じ場合はアルファベット順になる。

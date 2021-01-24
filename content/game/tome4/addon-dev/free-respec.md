@@ -57,9 +57,18 @@ function _M:atEnd(v)
 end
 ```
 
+先ほどの処理はプレイヤーキャラクターしかカバーしていないA。Alchemistのゴーレムなど仲間のステータスを振り直すときのためにそれぞれの初期値を調べて変数に保存しておく。書かれていないステータスは10。
+```lua
+local party_initial_stats = {
+	alchemist_golem = { str=14, dex=12, mag=12, con=12 },
+	worm_that_walks = { str=15, dex=12, mag=15, con=12 },
+	mecharachnid = { str=15, dex=12, cun=15, con=12 },
+}
+```
+
 `mod/dialogs/LevelupDialog.lua`の`incStat()`がステータスを変更するときに呼ばれる関数。これをsuperloadする。
 
-引数の`v`には、振り分けのときは`1`が、振り直しのときは`-1`が入っている。
+引数のvには、振り分けのときは1が、振り直しのときは-1が入っている。
 
 ```lua
 local base_incStat = _M.incStat
@@ -68,8 +77,21 @@ function _M:incStat(sid, v)
 	if v == 1 then
 		base_incStat(self, sid, v)
 		return
-	-- 振り直しのときは先ほどのステータス初期値と比較して高い場合のみ振り直し
+	-- 振り直しのとき
 	else
+		local initial_stat = nil
+		local stat_name = self.actor.stats_def[sid].short_name
+		-- プレイヤーなのか他の仲間なのか判定してそれぞれのステータス初期値を取得する。
+		if self.actor.initial_stats and self.actor.initial_stats[sid] then
+			initial_stat = self.actor.initial_stats[sid]
+		elseif self.actor.is_alchemist_golem then
+			initial_stat = party_initial_stats.alchemist_golem[stat_name] or 10
+		elseif self.actor.is_wtw_buddy then
+			initial_stat = party_initial_stats.worm_that_walks[stat_name] or 10
+		elseif self.actor.mecharachnid then
+			initial_stat = party_initial_stats.mecharachnid[stat_name] or 10
+		end
+		-- ステータス初期値と比較して高い場合のみ振り直し処理を続行。
 		if self.actor:getStat(sid, nil, nil, true) <= self.actor.initial_stats[sid] then
 			self:subtleMessage(_t"Impossible", _t"You cannot take out more points!", subtleMessageErrorColor)
 			return
