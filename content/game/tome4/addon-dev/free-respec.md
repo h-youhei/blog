@@ -38,59 +38,29 @@ return _M
 ```
 
 ### ステータス
-初期ステータスの保存のために`mod/dialogs/Birther.lua`の`atEnd()`をsuperloadしている。`self.actor.initial_stats`がステータスの保存に使っている変数。
-
-```lua
-local base_atEnd = _M.atEnd
-function _M:atEnd(v)
-	retval = base_atEnd(self,v)
-
-	if v == "created" and not self.ui_by_ui[self.c_ok].hidden then
-		self.actor.initial_stats = {}
-		-- kがステータスの種類, vがそれぞれのステータスの値
-		for k, v in pairs(self.actor.stats) do
-			self.actor.initial_stats[k] = v
-		end
-		self.actor.talent_types_learned = {}
-	end
-	return retval
-end
-```
-
-先ほどの処理はプレイヤーキャラクターしかカバーしていないA。Alchemistのゴーレムなど仲間のステータスを振り直すときのためにそれぞれの初期値を調べて変数に保存しておく。書かれていないステータスは10。
-```lua
-local party_initial_stats = {
-	alchemist_golem = { str=14, dex=12, mag=12, con=12 },
-	worm_that_walks = { str=15, dex=12, mag=15, con=12 },
-	mecharachnid = { str=15, dex=12, cun=15, con=12 },
-}
-```
-
 `mod/dialogs/LevelupDialog.lua`の`incStat()`がステータスを変更するときに呼ばれる関数。これをsuperloadする。
+
+初めて呼ばれたときに初期ステータスを保存する。`self.actor.initial_stats`がステータスの保存に使っている変数。
 
 引数のvには、振り分けのときは1が、振り直しのときは-1が入っている。
 
 ```lua
 local base_incStat = _M.incStat
 function _M:incStat(sid, v)
+	-- 初期ステータスの保存
+	if not self.actor.initial_stats then
+		self.actor.initial_stats = {}
+		-- kがステータスの種類, vがそれぞれのステータスの値
+		for k, v in pairs(self.actor.stats) do
+			self.actor.initial_stats[k] = v
+		end
+	end
 	-- ステータス振り分けのときには元の関数を使う。
 	if v == 1 then
 		base_incStat(self, sid, v)
 		return
 	-- 振り直しのとき
 	else
-		local initial_stat = nil
-		local stat_name = self.actor.stats_def[sid].short_name
-		-- プレイヤーなのか他の仲間なのか判定してそれぞれのステータス初期値を取得する。
-		if self.actor.initial_stats and self.actor.initial_stats[sid] then
-			initial_stat = self.actor.initial_stats[sid]
-		elseif self.actor.is_alchemist_golem then
-			initial_stat = party_initial_stats.alchemist_golem[stat_name] or 10
-		elseif self.actor.is_wtw_buddy then
-			initial_stat = party_initial_stats.worm_that_walks[stat_name] or 10
-		elseif self.actor.mecharachnid then
-			initial_stat = party_initial_stats.mecharachnid[stat_name] or 10
-		end
 		-- ステータス初期値と比較して高い場合のみ振り直し処理を続行。
 		if self.actor:getStat(sid, nil, nil, true) <= self.actor.initial_stats[sid] then
 			self:subtleMessage(_t"Impossible", _t"You cannot take out more points!", subtleMessageErrorColor)
@@ -127,6 +97,8 @@ end
 ```lua
 local base_learnType = _M.learnType
 function _M:learnType(tt, v)
+	-- はじめてこの関数が呼ばれたときには、ポイントを使って習得したカテゴリを覚えておく変数を初期化する
+	self.actor.talent_types_learned = self.actor.talent_types_learned or {}
 	-- カテゴリ習得時
 	if v then
 		base_learnType(self, tt, v)
@@ -134,7 +106,12 @@ function _M:learnType(tt, v)
 		if self.talent_types_learned[tt][1] then self.actor.talent_types_learned[tt] = true end
 	-- カテゴリを忘れるとき
 	else
-		-- 略 覚えてないのは忘れることができない
+		-- 習得していないものは忘れることができない
+		self.talent_types_learned[tt] = self.talent_types_learned[tt] or {}
+		if not self.actor:knowTalentType(tt) then
+			self:subtleMessage(_t"Impossible", _t"You do not know this category!", subtleMessageErrorColor)
+			return
+		end
 		if (self.actor.__increased_talent_types[tt] or 0) > 0 then
 			-- 略 実行レベル補正の強化を取り消す処理
 		else
