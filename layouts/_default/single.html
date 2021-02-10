@@ -13,16 +13,10 @@
 {{ end }}
 
 {{ define "title" }}
-	{{- if .Params.hide_section_in_title -}}
-		{{ .Title }} - {{ .Site.Title }}
+	{{- if .Params.section_in_title -}}
+		{{ .Params.section_in_title }} | {{ .Title }} - {{ .Site.Title }}
 	{{- else }}
-		{{- $parent := .Parent }}
-		{{- if $parent.IsHome }}
-			{{ .Title }} - {{ .Site.Title }}
-		{{- else }}
-			{{- if $parent.Params.hidden }} {{ $parent = $parent.Parent }} {{ end -}}
-			{{ $parent.Title }} | {{ .Title }} - {{ .Site.Title }}
-		{{- end }}
+		{{ .Title }} - {{ .Site.Title }}
 	{{- end }}
 {{- end -}}
 
