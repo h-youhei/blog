@@ -7,10 +7,10 @@ h1, h2, h3, h4 { border-color: #006600 }
 	font-family: sans-serif;
 }
 #site-header { background-color: #005500 }
-#site-footer { background-color: #482800 }
+#site-footer { background-color: #381000 }
 #site-header a, #site-footer, #site-footer a { color: #f8f8f8 }
 
-code { background-color: #e0e0e0 }
+not(table) code { background-color: #e0e0e0 }
 
 /*** default element style ***/
 body { margin: 0 }

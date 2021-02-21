@@ -5,6 +5,7 @@ description = """ToME4でステータス、タレント、カテゴリ、奥義�
 date = 2020-12-11T10:05:32+09:00
 syntax = true
 toc = true
+lastmod = 2021-02-20T11:58:51+09:00
 +++
 <!--more-->
 ## 目的
@@ -147,6 +148,8 @@ end
 一時的に習得することで有利になる奥義の判定ではWrithing Ring of the Hunter(装備している間、奥義を一時的に習得できる指輪)のコードを参考にした。`tome-cults/overload/mod/dialogs/RingOfTheHunter.lua`
 
 ```lua
+-- mod/dialogs/UberTalent.lua
+
 local base_use = _M.use
 function _M:use(item)
 	-- 忘れるとき
@@ -174,8 +177,56 @@ function _M:use(item)
 		if self.unlearnedTalents[item.talent] then
 			self.actor:learnTalent(item.talent, true, nil, {no_unlearn=true})
 			self.unlearnedTalents[item.talent] = false
+			self.levelup_end_prodigies[item.talent] = false
 		end
 	end
+end
+```
+
+なにか振り分けした後にダイアログを閉じると変更を確定するか取り消すか選択するポップアップがでてきて、変更を確定したら実際にタレントを習得する処理が走るのだけど、奥義の振り分けがあったかどうかの判定には振り分け可能なポイントの変更があったかどうかだけを見ている。振り直しを許さない場合はそれで問題ないのだけど、なにか奥義を忘れて他の奥義を覚えるとした場合、振り分け可能なポイントには変更がないけど振り分けが行われている。
+
+| 振り分け | ポップアップ | 変数の変化 |
+| --- | --- | --- |
+| なにかに振り分けた | 必要 | `unused_prodigies`<br>`levelup_end_prodigies` |
+| なにかを忘れた | 必要 | `unused_prodigies` |
+| なにかに振り分けたが<br>やっぱりやめた | 不要 | なし |
+| なにかを忘れたが<br>やっぱりやめた | 不要 | なし |
+| なにかを忘れて<br>別のものに振り分けた | 必要 | `levelup_end_prodigies` |
+
+また`mod/dialogs/LevelupDialog.lua`の`createDisplay`でProdigies(奥義)ボタンが押されたときに
+```lua
+require("mod.dialogs.ubertalent").new(self.actor, self.on_finish_prodigies)
+```
+で奥義習得ダイアログを生成していて、
+`mod/dialogs/UberTalent.lua`の`init()`の第2引数は`levelup_end_prodigies`なので`on_finish_prodigies`と`levelup_end_prodigies`は同じものを指している。
+
+よって奥義の振り分けが行われたかの判定に`on_finish_prodigies`も使えばいい。その判定は`mod/dialogs/LevelupDialog.lua`の`init()`の`key:addBinds{EXIT}`で行われている。これをsuperloadする。元の処理をコピーして判定部分を書き換えた。
+
+```lua
+local base_init = _M.init
+function _M:init(actor, on_finish, on_birth)
+	base_init(self, actor, on_finish, on_birth)
+	self.key:addBinds{
+		EXIT = function()
+			local changed = --略
+			-- 略 アドオンなしでも振り直し可能な直近のタレント振り分けに変化がないか。あればchanged = true
+			
+			-- on_finish_prodigiesの各要素がすべてfalseでも存在していたらon_finish_prodigies自体は中身のあるテーブルで真と判定されるのでループをかけて各要素を見る
+			if self.on_finish_prodigies then
+				for tid, ok in pairs(self.on_finish_prodigies) do
+					if ok then
+						changed = true
+						break
+					end
+				end
+			end
+			if 略、ステータスやタレント、カテゴリに変化がある or self.actor.unused_prodigies ~= self.actor_dup.unused_prodigies or changed then
+				-- 略 変更を確定するかキャンセルするかを選択するポップアップ
+			else
+				-- 略 ダイアログを閉じる
+			end
+		end,
+	}
 end
 ```
 
